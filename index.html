@@ -56,13 +56,7 @@
     function setPushStatus(message, ok=false) { statusEl.textContent = message; statusEl.classList.toggle("push-ok", ok); }
     if (window.BirthdayPush) {
       window.BirthdayPush.registerPushServiceWorker().catch(() => {});
-      if (Notification.permission === "granted") {
-        enableBtn.textContent = "Morning surprises are ON ❤️";
-        enableBtn.disabled = true;
-        testBtn.hidden = false;
-        setPushStatus("You are ready. I’ll send your little morning surprise at 7:45 AM. 💌", true);
-      }
-      enableBtn.addEventListener("click", async () => {
+            enableBtn.addEventListener("click", async () => {
         enableBtn.disabled = true;
         setPushStatus("Setting up your little surprise… ❤️");
         try {
