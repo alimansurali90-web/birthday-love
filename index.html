@@ -1,10 +1,10 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#f7c8d8" />
-  <meta name="description" content="A private birthday countdown filled with love." />
+  <meta name="description" content="A little collection of surprises, made with love." />
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="style.css" />
   <title>For Mammmmmmaaa ❤️</title>
@@ -14,36 +14,29 @@
     <div class="floating-hearts" aria-hidden="true">♡ ♥ ♡ ♥ ♡</div>
 
     <section class="hero-card">
-      <p class="eyebrow">A LITTLE SURPRISE FOR YOU</p>
-      <h1>Good morning,<br><span>mammmmmmaaa ❤️</span></h1>
-      <p class="subtitle">A new little love letter, every morning.</p>
-
-      <div class="countdown-card">
-        <p class="countdown-label">UNTIL YOUR SPECIAL DAY</p>
-        <div id="countdown" class="countdown">--</div>
-        <p id="countdownText">days of excitement left</p>
-      </div>
+      <p class="eyebrow">A LITTLE SURPRISE FOR YOU ✨</p>
+      <h1>For you,<br><span>mammmmmmaaa ❤️</span></h1>
+      <p class="subtitle">I’ve prepared a few little surprises just for you… ❤️ You won't know when they arrive, so let me keep a tiny bit of mystery between us. 🥹💗</p>
     </section>
 
     <section class="letter-card">
-      <p class="section-label">TODAY'S LITTLE LETTER 💌</p>
-      <h2 id="letterTitle">Good morning, my love</h2>
+      <p class="section-label">A LITTLE NOTE FOR YOU 💌</p>
+      <h2 id="letterTitle">Something special is waiting for you… ❤️</h2>
       <p id="letterText"></p>
       <p class="signature">Always yours, ❤️</p>
     </section>
 
     <section class="notification-card" id="notificationCard">
-      <p class="section-label">A LITTLE MORNING SURPRISE 🔔</p>
-      <h2>Let me wake you with love. ❤️</h2>
-      <p id="notificationStatus">One tap lets me send you a different little love message every morning at 7:45 AM.</p>
-      <button id="enableNotifications" class="love-button" type="button">Allow my morning surprises 💌</button>
+      <p class="section-label">LET THE LITTLE SURPRISES FIND YOU 💌</p>
+      <h2>I left a few little surprises here for you. ❤️</h2>
+      <p id="notificationStatus">Allow notifications so you don't miss the little moments I've prepared for you. ❤️</p>
+      <button id="enableNotifications" class="love-button" type="button">💗 Allow My Little Surprises</button>
       <button id="testNotification" class="test-button" type="button" hidden>Send me a test notification</button>
     </section>
 
     <section class="info-card">
-      <p><strong>Birthday:</strong> October 31, 2026</p>
-      <p><strong>Next surprise:</strong> A different message every morning</p>
-      <p class="small-note">30 morning love letters begin October 1. 🔔 Once notifications are allowed, the morning surprise is automatic.</p>
+      <p><strong>Just for you ❤️</strong></p>
+      <p>A tiny corner filled with little surprises, made with love.</p>
     </section>
   </main>
 
@@ -53,31 +46,42 @@
     const enableBtn = document.querySelector("#enableNotifications");
     const testBtn = document.querySelector("#testNotification");
     const statusEl = document.querySelector("#notificationStatus");
-    function setPushStatus(message, ok=false) { statusEl.textContent = message; statusEl.classList.toggle("push-ok", ok); }
+
+    function setPushStatus(message, ok=false) {
+      statusEl.textContent = message;
+      statusEl.classList.toggle("push-ok", ok);
+    }
+
     if (window.BirthdayPush) {
       window.BirthdayPush.registerPushServiceWorker().catch(() => {});
-            enableBtn.addEventListener("click", async () => {
+
+      enableBtn.addEventListener("click", async () => {
         enableBtn.disabled = true;
         setPushStatus("Setting up your little surprise… ❤️");
+
         try {
           await window.BirthdayPush.subscribeToPush();
-          enableBtn.textContent = "Morning surprises are ON ❤️";
-          setPushStatus("All set. Your little love messages can now arrive at 7:45 AM. 💌", true);
+          enableBtn.textContent = "Little Surprises Are ON ❤️";
+          setPushStatus("All set. Your little surprises can now find you. ✨", true);
           testBtn.hidden = false;
         } catch (error) {
           enableBtn.disabled = false;
           setPushStatus(error.message || "Something went wrong. Please try again.");
         }
       });
+
       testBtn.addEventListener("click", async () => {
         testBtn.disabled = true;
         setPushStatus("Sending a tiny test message… 💌");
+
         try {
           await window.BirthdayPush.testPush();
           setPushStatus("Test sent. Check your phone notifications. ❤️", true);
         } catch (error) {
           setPushStatus(error.message || "The test could not be sent.");
-        } finally { testBtn.disabled = false; }
+        } finally {
+          testBtn.disabled = false;
+        }
       });
     }
   </script>
